@@ -1,0 +1,48 @@
+.histogram {
+    padding: 5px 5px 5px 44px;
+    text-align: left;
+    width: 100%;
+  }
+  .histogram .bar-container {
+    position: relative;
+    margin-bottom: 5px;
+  }
+  .histogram .bar-label {
+    margin-right: 10px;
+    position: absolute;
+    left: -44px;
+    top: 2px;
+  }
+  .histogram .bar-label:before {
+    content: "\f005";
+    font-family: FontAwesome;
+    font-size: 16px;
+    line-height: 16px;
+    height: 16px;
+    width: 16px;
+    color: #ccc;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .histogram .bar {
+    background-color: #8e70af;
+    background-image: -webkit-linear-gradient(left, #8e70af, #48bfed);
+    background-image: linear-gradient(to right,#8e70af, #48bfed);
+    -webkit-transition: width 2s ease;
+    -moz-transition: width 2s ease;
+    transition: width 2s ease;
+    opacity: .8;
+    display: inline-block;
+    vertical-align: middle;
+    width: 1%;
+    height: 15px;
+    margin-right: 3px;
+  }
+  .histogram .bar-number {
+    font-size: 14px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+  .hidden{
+    display: none;
+  }
