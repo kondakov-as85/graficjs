@@ -8,43 +8,26 @@
     <script type="text/javascript" src="js/graficjq.js"></script>
 </head>
 <body>
-    <div class="histogram">
-        <div class="bar-container" data-id="1">
-          <span class="bar-label"> 1 </span>
-          <span class="bar"></span>
-          <span class="bar-number"></span>
-        </div>
-         <div class="bar-container" data-id="2">
-          <span class="bar-label"> 2 </span>
-          <span class="bar"></span>
-          <span class="bar-number"></span> 
-        </div>
-        <div class="bar-container" data-id="3">
-          <span class="bar-label"> 3 </span>
-          <span class="bar"></span>
-          <span class="bar-number"></span>
-        </div>
-        <div class="bar-container" data-id="2">
-          <span class="bar-label"> 4 </span>
-          <span class="bar"></span>
-          <span class="bar-number"></span> 
-        </div>
-        <div class="bar-container" data-id="1">
-          <span class="bar-label"> 5 </span>
-          <span class="bar"></span>
-          <span class="bar-number"></span>
-        </div>
-      </div><!-- /histogram -->
-       
-      <div class="hidden"><!-- needs for jquery calculations -->
+    <div>
         <form>
-          <input type="text" class="reviews_1star" value="10">
-          <input type="text" class="reviews_2star" value="2">
-          <input type="text" class="reviews_3star" value="3">
-          <input type="text" class="reviews_4star" value="4">
-          <input type="text" class="reviews_5star" value="5">
+            <label>Количество гафиков: </label><input type="text" id="countDiagrams" value="5"><br>
+            <label>Максимальное значение: </label><input type="text" id="maxValue" value="100"><br>  
         </form>
-      </div><!-- /hidden -->
+        <button onclick="init()">Построить графики</button>
+    </div>
 
+    <br>    
+    
+    <div class="histogram">
+
+    </div>
+
+
+    <div>
+        <button onclick="drawChart.start()">Старт</button>
+        <button onclick="stop()">Стоп</button>
+    </div>
+      
+            
 </body>
 </html>

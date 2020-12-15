@@ -1,11 +1,13 @@
 .histogram {
     padding: 5px 5px 5px 44px;
     text-align: left;
-    width: 100%;
+    width: 95%;
   }
   .histogram .bar-container {
+    background-color: wheat;
     position: relative;
     margin-bottom: 5px;
+
   }
   .histogram .bar-label {
     margin-right: 10px;
@@ -25,9 +27,7 @@
     margin-right: 5px;
   }
   .histogram .bar {
-    background-color: #8e70af;
-    background-image: -webkit-linear-gradient(left, #8e70af, #48bfed);
-    background-image: linear-gradient(to right,#8e70af, #48bfed);
+    background-color: green;    
     -webkit-transition: width 2s ease;
     -moz-transition: width 2s ease;
     transition: width 2s ease;
@@ -37,6 +37,13 @@
     width: 1%;
     height: 15px;
     margin-right: 3px;
+  }
+  .histogram .dash {
+    background-color: black;
+    width: 5px;
+    height: 15px;
+    margin-left: 20px;
+    display: inline-block;
   }
   .histogram .bar-number {
     font-size: 14px;
