@@ -6,6 +6,7 @@ var ctx = myCanvas.getContext("2d");
  
 function drawLine(ctx, startX, startY, endX, endY,color){
     ctx.save();
+    
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.moveTo(startX,startY);

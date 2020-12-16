@@ -42,7 +42,7 @@
     background-color: black;
     width: 5px;
     height: 15px;
-    margin-left: 20px;
+    margin-left: 0px;
     display: inline-block;
   }
   .histogram .bar-number {
