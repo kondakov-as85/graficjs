@@ -1,3 +1,33 @@
+    // var drawChart;
+
+    // var init = function() {
+    //     var countDiagrams = document.getElementById("countDiagrams").value;
+    //     var maxValue = document.getElementById("maxValue").value;
+        
+    //     drawChart = new DrawChart(
+    //         {
+    //             countDiagrams,
+    //             maxValue,
+    //             dashValues: [10, 15, 34, 48, 24]
+    //         }
+    //     );
+    //     drawChart.draw();
+    // };
+
+    // var DrawChart = function(options){
+        
+    //     this.draw = function() {
+    //         var histogram = document.getElementsByClassName("histogram")[0];
+
+    //         var canvas = document.createElement("canvas");
+
+    //     }
+
+    // }
+
+
+
+
 var myCanvas = document.getElementById("myCanvas");
 myCanvas.width = 300;
 myCanvas.height = 300;
@@ -23,10 +53,10 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
 }
  
 var myVinyls = {
-    "Classical music": 10,
-    "Alternative rock": 14,
-    "Pop": 2,
-    "Jazz": 12
+    "Classical music": 100,
+    "Alternative rock": 100,
+    "Pop": 100,
+    "Jazz": 100
 };
  
 var Barchart = function(options){
@@ -67,25 +97,58 @@ var Barchart = function(options){
         //     gridValue+=this.options.gridScale;
         // }      
   
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // var barIndex = 0;
+        // var numberOfBars = Object.keys(this.options.data).length;
+        // var barSize = (canvasActualWidth)/numberOfBars;
+ 
+        // for (categ in this.options.data){
+        //     var val = this.options.data[categ];
+        //     var barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+        //     drawBar(
+        //         this.ctx,
+        //         this.options.padding + barIndex * barSize,
+        //         this.canvas.height - barHeight - this.options.padding,
+        //         barSize,
+        //         barHeight,
+        //         this.colors[barIndex%this.colors.length]
+        //     );
+ 
+        //     barIndex++;
+        // }
+
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //drawing the bars
         var barIndex = 0;
         var numberOfBars = Object.keys(this.options.data).length;
-        var barSize = (canvasActualWidth)/numberOfBars;
+        var barHeight = (canvasActualHeight)/numberOfBars;
+        var offset = 8;
  
+        setInterval(function() {
+
+
+            
+        }, 1000);
+
+
         for (categ in this.options.data){
             var val = this.options.data[categ];
-            var barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+            var barSize = Math.round( canvasActualWidth * val/maxValue) ;
+
             drawBar(
                 this.ctx,
-                this.options.padding + barIndex * barSize,
-                this.canvas.height - barHeight - this.options.padding,
-                barSize,
-                barHeight,
-                this.colors[barIndex%this.colors.length]
+                0 + this.options.padding,                                               //x
+                barHeight * barIndex + barHeight - this.options.padding - 30,           //y
+                barSize,                                                                //w            
+                barHeight - this.options.padding,                                       //h
+                "green"
+                // this.colors[barIndex%this.colors.length]
             );
  
             barIndex++;
         }
+
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  
         //drawing series name
         // this.ctx.save();
@@ -118,7 +181,7 @@ var myBarchart = new Barchart(
     {
         canvas:myCanvas,
         seriesName:"Vinyl records",
-        padding:20,
+        padding:8,
         gridScale:5,
         gridColor:"#eeeeee",
         data:myVinyls,
