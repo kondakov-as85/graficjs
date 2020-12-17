@@ -7,7 +7,7 @@
     background-color: wheat;
     position: relative;
     margin-bottom: 5px;
-
+    height: 20px;
   }
   .histogram .bar-label {
     margin-right: 10px;
@@ -27,28 +27,28 @@
     margin-right: 5px;
   }
   .histogram .bar {
-    background-color: green;    
-    /* -webkit-transition: width 2s ease; */
-    /* -moz-transition: width 2s ease; */
-    /* transition: width 2s ease; */
+    background-color: green;        
     opacity: .8;
-    display: inline-block;
-    vertical-align: middle;
-    width: 1%;
-    height: 15px;
+    display: inline-block;    
+    width: 0px;
+    height: 20px;
     margin-right: 3px;
   }
   .histogram .dash {
     background-color: black;
-    width: 5px;
-    height: 15px;
+    position: absolute;
+    width: 10px;
+    height: 20px;
     margin-left: 0px;
     display: inline-block;
   }
   .histogram .bar-number {
     font-size: 14px;
     line-height: 1;
-    vertical-align: middle;
+    vertical-align: super;
+    position: relative;
+    margin-top: 4px;
+    margin-left: -40px;
   }
   .hidden{
     display: none;

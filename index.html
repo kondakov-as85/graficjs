@@ -10,29 +10,18 @@
 </head>
 <body>
     <div>
-        <form>
-            <label>Количество гафиков: </label><input type="text" id="countDiagrams" value="5"><br>
+        <form>            
             <label>Максимальное значение: </label><input type="text" id="maxValue" value="500"><br>  
+            <label>Задержка в секундах: </label><input type="text" id="durationValue" value="0.2"><br>
         </form>
         <button onclick="init()">Построить графики</button>
     </div>
 
-    <br>    
-    
+    <br>        
     <div class="histogram"></div>
-
-    <div class="canvaHistogram"></div>
-
-
     <div>
         <button onclick="drawChart.start()">Старт</button>
-        <button onclick="stop()">Стоп</button>
-    </div>
-
-    <!-- <canvas id="myCanvas" style="background: wheat;"></canvas>
-    <legend for="myCanvas"></legend>
-    <script type="text/javascript" src="js/grafic.js"></script> -->
-    
-            
+        <button onclick="drawChart.stop()">Стоп</button>
+    </div>            
 </body>
 </html>
