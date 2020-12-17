@@ -68,9 +68,10 @@ function startAnimationBar(indexBar, width, duration, count) {
             printLastValue("-1");   
             if (indexBar < count) {
                 $('.bar-container[data-id='+indexBar+'] .bar').css('width', '0px' )        
-                                .animate({width: width+'px'}, 
+                                .animate({width: width+'px'},                                    
                                     {
-                                        duration,
+                                        duration,            
+                                        easing: "linear",                            
                                         complete: function(){ // функция будет выполнена после завершения анимации
                                             printLastValue();
                                             startAnimationBar(indexBar + 1, width, duration, count)
