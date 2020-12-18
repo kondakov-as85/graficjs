@@ -4,60 +4,62 @@
     <meta charset="UTF-8">    
     <title>GraficJS</title>    
     <style>
-        .histogram {    
-                        text-align: left;
-                        width: 95%;
-                    }
-                    .histogram .bar-container {
-                        background-color: wheat;
-                        position: relative;
-                        margin-bottom: 5px;
-                        height: 20px;
-                    }
-                    .histogram .bar-label {
-                        margin-right: 10px;
-                        position: absolute;
-                        left: -44px;
-                        top: 2px;
-                    }
-                    .histogram .bar-label:before {
-                        content: "\f005";
-                        font-family: FontAwesome;
-                        font-size: 16px;
-                        line-height: 16px;
-                        height: 16px;
-                        width: 16px;
-                        color: #ccc;
-                        display: inline-block;
-                        margin-right: 5px;
-                    }
-                    .histogram .bar {
-                        background-color: green;        
-                        opacity: .8;
-                        display: inline-block;    
-                        width: 0px;
-                        height: 20px;
-                        margin-right: 3px;
-                    }
-                    .histogram .dash {
-                        background-color: black;
-                        position: absolute;
-                        width: 10px;
-                        height: 20px;
-                        margin-left: 0px;
-                        display: inline-block;
-                    }
-                    .histogram .bar-number {
-                        font-size: 14px;
-                        line-height: 1;
-                        vertical-align: super;
-                        position: relative;
-                        margin-top: 4px;
-                        margin-left: -40px;
-                    }
-                    .hidden{
-                        display: none;
-                    }
+        .histogram {
+            /* padding: 5px 5px 5px 44px; */
+            text-align: left;
+            width: 95%;
+            height: 100%;
+        }
+        .histogram .bar-container {
+            background-color:rgb(251,237,158);
+            position: relative;
+            margin-bottom: 5px;
+            height: 20px;
+        }
+        .histogram .bar-label {
+            margin-right: 10px;
+            position: absolute;
+            left: -44px;
+            top: 2px;
+        }
+        .histogram .bar-label:before {
+            content: "\f005";
+            font-family: FontAwesome;
+            font-size: 16px;
+            line-height: 16px;
+            height: 16px;
+            width: 16px;
+            color: #ccc;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .histogram .bar {
+            background-color:rgb(0,150,70);        
+            opacity: .8;
+            display: inline-block;    
+            width: 0px;
+            height: 100%;
+            margin-right: 3px;
+        }
+        .histogram .dash {
+            background-color: black;
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            margin-left: 0px;
+            display: inline-block;
+        }
+        .histogram .bar-number {
+            font-size: 14px;
+            line-height: 1;
+            vertical-align: super;
+            position: relative;
+            margin-top: 4px;
+            margin-left: -40px;
+        }
+        .hidden{
+            display: none;
+        }
     </style>
     <!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
     <script>
@@ -68,20 +70,21 @@ marginLeft:0},function(){return a.getBoundingClientRect().left}):0))+"px":void 0
 padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){var f=arguments.length&&(c||"boolean"!=typeof d),g=c||(d===!0||e===!0?"margin":"border");return Y(this,function(b,c,d){var e;return n.isWindow(b)?b.document.documentElement["client"+a]:9===b.nodeType?(e=b.documentElement,Math.max(b.body["scroll"+a],e["scroll"+a],b.body["offset"+a],e["offset"+a],e["client"+a])):void 0===d?n.css(b,c,g):n.style(b,c,d,g)},b,f?d:void 0,f,null)}})}),n.fn.extend({bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}}),n.fn.size=function(){return this.length},n.fn.andSelf=n.fn.addBack,"function"==typeof define&&define.amd&&define("jquery",[],function(){return n});var nc=a.jQuery,oc=a.$;return n.noConflict=function(b){return a.$===n&&(a.$=oc),b&&a.jQuery===n&&(a.jQuery=nc),n},b||(a.jQuery=a.$=n),n});
     </script>
     <script>
+            var externalForm = null;
+            var interactionVariable = null;
+
             var drawChart;
 
             var queueName = 'barsQueue';
 
             var currentDrawBarIndex = 0;
 
-            var init = function(maxValue, Values) {    
-                //var maxValue = document.getElementById("maxValue").value;
-                //var durationValue = document.getElementById("durationValue").value;
-                
+            var init = function(params) {    	
                 drawChart = new DrawChart(
                     {            
-                        maxValue,                        
-                        dashValues: Values
+                        maxValue: params.maxValue,
+                        heightBar: params.heightBar,                        
+                        dashValues: params.Values
                     }
                 );
                 drawChart.drawPanel();
@@ -89,6 +92,7 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
 
             var DrawChart = function(options){    
                 this.width = parseInt(options.maxValue);
+                this.heightBar = parseInt(options.heightBar);
                 this.dashValues = options.dashValues;
                 this.count = parseInt(this.dashValues.length) + 1;
                 console.log('Count: ', this.count);
@@ -100,7 +104,7 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                     // Чистим поле диаграмм
                     histogram.innerHTML='';
                     // Задаем ширину для диаграмм
-                    $('.histogram').css('width', this.width+'px' );        
+                    $('.histogram').css('width', this.width+'px' );		
                     // Рисуем поля для графиков и метки
                     for(var i = 1; i < this.count; i++) {
                         let containerBar = document.createElement("div");
@@ -111,6 +115,7 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                         let ml = parseInt(this.dashValues[i-1].l);
                         drawDash(i, ml);
                     }
+                    $('.bar-container').css('height', this.heightBar+'px' );
                 };
 
                 this.start = function() {        
@@ -118,14 +123,14 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                 };
 
                 this.stop = function() {
-                 	let Value = $('.bar-container[data-id='+currentDrawBarIndex+'] .bar').css('width').replace('px', '');
-				 	let result = {};
-				 	result["BarNumber"] = currentDrawBarIndex;
-				 	result["Value"] = Value;
-                 	if (Value > 0) {
-                 		stopAnimationBar(this.width, this.dashValues);
-                 	}
-				 	return result; 
+                    let Value = $('.bar-container[data-id='+currentDrawBarIndex+'] .bar').css('width').replace('px', '');
+                    let result = {};
+                    result["BarNumber"] = currentDrawBarIndex;
+                    result["Value"] = Value;
+                    if (Value > 0) {
+                        stopAnimationBar(this.width, this.dashValues);
+                    }
+                    return result; 
                 }
             };
 
@@ -150,6 +155,10 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                                                     duration: dashValues[indexBar-1].d*1000,                                                                
                                                     easing: "linear",                            
                                                     complete: function(){ // функция будет выполнена после завершения анимации
+                                                        let result = {};
+                                                        result["BarNumber"] = indexBar;
+                                                        result["Value"] = -1;
+                                                        MessageTo1C(result);
                                                         startAnimationBar(indexBar + 1, width, dashValues)
                                                         $('.bar-container[data-id='+(indexBar + 1)+'] .bar').dequeue(queueName);
                                                     }
@@ -172,18 +181,21 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                 $('.bar-container[data-id=' + currentDrawBarIndex + '] .bar').stop();
                 startAnimationBar(currentDrawBarIndex + 1, width, dashValues);
             }
-            
+
             function startBar() {
-				drawChart.start();
-			}
+                drawChart.start();
+            }
             function stopBar() {
-				return drawChart.stop();
+                return drawChart.stop();
             }
             // function InitBar(paramString) {
-                    // params = JSON.parse(paramString);
+            // 	params = JSON.parse(paramString);
+            // 	init(params);
+            // }
             function InitBar() {                
                 let paramString = {
                     'maxValue': 500,
+                    'heightBar': 50,
                     // 'durationValue': 2,
                     'Values': [
                         {l: 100, d: 0.1},
@@ -193,9 +205,21 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                     ]
                 }                
                 params = paramString;
-				
-				init(params.maxValue, params.Values);
-			}
+                
+                init(params);
+            }
+            function MessageTo1C(message) {
+                try
+                {
+                    externalForm.МетодВызываемыйИзJavaScript(message);
+                }
+                catch(err)
+                {
+                    interactionVariable = message;
+                    interactionButton.click();
+                }
+            }
+
     </script>
     
 </head>

@@ -2,9 +2,10 @@
     /* padding: 5px 5px 5px 44px; */
     text-align: left;
     width: 95%;
+    height: 100%;
   }
   .histogram .bar-container {
-    background-color: wheat;
+    background-color:rgb(251,237,158);
     position: relative;
     margin-bottom: 5px;
     height: 20px;
@@ -27,18 +28,18 @@
     margin-right: 5px;
   }
   .histogram .bar {
-    background-color: green;        
+    background-color:rgb(0,150,70);        
     opacity: .8;
     display: inline-block;    
     width: 0px;
-    height: 20px;
+    height: 100%;
     margin-right: 3px;
   }
   .histogram .dash {
     background-color: black;
     position: absolute;
     width: 10px;
-    height: 20px;
+    height: 100%;
     margin-left: 0px;
     display: inline-block;
   }
