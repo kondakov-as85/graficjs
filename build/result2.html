@@ -84,7 +84,9 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                     {            
                         maxValue: params.maxValue,
                         heightBar: params.heightBar,                        
-                        dashValues: params.Values
+                        dashValues: params.Values,
+                        widthDash: params.widthDash,
+                        heightGap: params.heightGap
                     }
                 );
                 drawChart.drawPanel();
@@ -94,6 +96,8 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                 this.width = parseInt(options.maxValue);
                 this.heightBar = parseInt(options.heightBar);
                 this.dashValues = options.dashValues;
+                this.widthDash = options.widthDash;
+                this.heightGap = options.heightGap;
                 this.count = parseInt(this.dashValues.length) + 1;
                 console.log('Count: ', this.count);
                 
@@ -113,9 +117,10 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                         containerBar.innerHTML = '<span class="bar"><span class="dash"></span></span>';
                         histogram.append(containerBar);
                         let ml = parseInt(this.dashValues[i-1].l);
-                        drawDash(i, ml);
+                        drawDash(i, ml, this.widthDash);
                     }
-                    $('.bar-container').css('height', this.heightBar+'px' );
+                    $('.histogram .bar-container').css('height', this.heightBar+'px' );
+                    $('.histogram .bar-container').css('margin-bottom', this.heightGap+'px' );
                 };
 
                 this.start = function() {        
@@ -134,9 +139,10 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                 }
             };
 
-            function drawDash(indexDash, ml) {
+            function drawDash(indexDash, ml, widthDash) {
                 if (ml) {
                     $('.bar-container[data-id='+(indexDash)+'] .dash').css('margin-left', ml+'px' );
+                    $('.bar-container[data-id='+(indexDash)+'] .dash').css('width', widthDash+'px' );		
                 }
             }
 
@@ -196,7 +202,8 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                 let paramString = {
                     'maxValue': 500,
                     'heightBar': 50,
-                    // 'durationValue': 2,
+                    'widthDash': 5,
+                    'heightGap': 20,		
                     'Values': [
                         {l: 100, d: 0.1},
                         {l: 200, d: 3},
@@ -219,6 +226,7 @@ padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){va
                     interactionButton.click();
                 }
             }
+
 
     </script>
     

@@ -12,7 +12,9 @@ var init = function(params) {
 		{            
 			maxValue: params.maxValue,
 			heightBar: params.heightBar,                        
-			dashValues: params.Values
+			dashValues: params.Values,
+			widthDash: params.widthDash,
+			heightGap: params.heightGap
 		}
 	);
 	drawChart.drawPanel();
@@ -22,6 +24,8 @@ var DrawChart = function(options){
 	this.width = parseInt(options.maxValue);
 	this.heightBar = parseInt(options.heightBar);
 	this.dashValues = options.dashValues;
+	this.widthDash = options.widthDash;
+	this.heightGap = options.heightGap;
 	this.count = parseInt(this.dashValues.length) + 1;
 	console.log('Count: ', this.count);
 	
@@ -41,9 +45,10 @@ var DrawChart = function(options){
 			containerBar.innerHTML = '<span class="bar"><span class="dash"></span></span>';
 			histogram.append(containerBar);
 			let ml = parseInt(this.dashValues[i-1].l);
-			drawDash(i, ml);
+			drawDash(i, ml, this.widthDash);
 		}
-		$('.bar-container').css('height', this.heightBar+'px' );
+		$('.histogram .bar-container').css('height', this.heightBar+'px' );
+		$('.histogram .bar-container').css('margin-bottom', this.heightGap+'px' );
 	};
 
 	this.start = function() {        
@@ -62,9 +67,10 @@ var DrawChart = function(options){
 	}
 };
 
-function drawDash(indexDash, ml) {
+function drawDash(indexDash, ml, widthDash) {
 	if (ml) {
 		$('.bar-container[data-id='+(indexDash)+'] .dash').css('margin-left', ml+'px' );
+		$('.bar-container[data-id='+(indexDash)+'] .dash').css('width', widthDash+'px' );		
 	}
 }
 
@@ -124,7 +130,8 @@ function InitBar() {
 	let paramString = {
 		'maxValue': 500,
 		'heightBar': 50,
-		// 'durationValue': 2,
+		'widthDash': 5,
+		'heightGap': 20,		
 		'Values': [
 			{l: 100, d: 0.1},
 			{l: 200, d: 3},
