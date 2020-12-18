@@ -9,19 +9,15 @@
     
 </head>
 <body>
-    <div>
-        <form>            
-            <label>Максимальное значение: </label><input type="text" id="maxValue" value="500"><br>  
-            <label>Задержка в секундах: </label><input type="text" id="durationValue" value="0.2"><br>
-        </form>
-        <button onclick="init()">Построить графики</button>
+    <div>        
+        <button onclick="InitBar()">Построить графики</button>
     </div>
 
     <br>        
     <div class="histogram"></div>
     <div>
-        <button onclick="drawChart.start()">Старт</button>
-        <button onclick="drawChart.stop()">Стоп</button>
+        <button onclick="startBar()">Старт</button>
+        <button onclick="stopBar()">Стоп</button>
     </div>            
 </body>
 </html>
